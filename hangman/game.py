@@ -1,7 +1,6 @@
 from .exceptions import *
-import random
-
 class GuessAttempt(object):
+
     def __init__(self, letter, hit=False, miss=False):
         if hit and miss:
             raise InvalidGuessAttempt()
