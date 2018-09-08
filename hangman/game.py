@@ -4,7 +4,7 @@ import random
 class GuessAttempt(object):
     def __init__(self, letter, hit=False, miss=False):
         if hit and miss:
-            raise InvalidGuessAttempt
+            raise InvalidGuessAttempt()
 
         self.letter = letter
         self.hit = hit
@@ -26,7 +26,7 @@ class GuessWord(object):
 
     def __init__(self, word):
         if not word:
-            raise InvalidWordException
+            raise InvalidWordException()
         self.answer = word
         self.masked = '*' * len(word)
 
@@ -41,7 +41,7 @@ class GuessWord(object):
 
     def perform_attempt(self, letter):
         if len(letter) != 1:
-            raise InvalidGuessedLetterException
+            raise InvalidGuessedLetterException()
 
         if letter.lower() in self.answer.lower():
             attempt = GuessAttempt(letter, hit=True)
@@ -66,7 +66,7 @@ class HangmanGame(object):
 
     def guess(self, letter):
         if self.is_finished():
-            raise GameFinishedException
+            raise GameFinishedException()
 
         self.previous_guesses.append(letter.lower())
         attempt = self.word.perform_attempt(letter)
@@ -74,9 +74,9 @@ class HangmanGame(object):
         if attempt.is_miss():
             self.remaining_misses -= 1
         if self.is_won():
-            raise GameWonException
+            raise GameWonException()
         if self.is_lost():
-            raise GameLostException
+            raise GameLostException()
 
         return attempt
 
@@ -98,5 +98,5 @@ class HangmanGame(object):
     @classmethod
     def select_random_word(cls, word_list):
         if not word_list:
-            raise InvalidListOfWordsException
+            raise InvalidListOfWordsException()
         return random.choice(word_list)
