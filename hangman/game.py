@@ -1,3 +1,4 @@
+import random
 from .exceptions import *
 class GuessAttempt(object):
 
